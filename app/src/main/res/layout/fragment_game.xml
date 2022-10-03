@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="gameViewModel"
+            type="com.example.guesstheword.game.GameViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/word_label_text"
+            style="@style/small_text"
+            android:text="The word is..."
+            app:layout_constraintBottom_toTopOf="@+id/word_display_text"
+            app:layout_constraintEnd_toEndOf="@+id/word_display_text"
+            app:layout_constraintStart_toStartOf="@+id/word_display_text" />
+
+        <TextView
+            android:id="@+id/word_display_text"
+            style="@style/big_text"
+            android:text="@{@string/quote_format(gameViewModel.word)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/skip_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:onClick="@{() -> gameViewModel.onSkip()}"
+            android:text="Skip"
+            android:textColor="#2B2929"
+            app:backgroundTint="#F1F1F1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/got_it_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:onClick="@{() -> gameViewModel.onCorrect()}"
+            android:text="Got it"
+            app:layout_constraintBaseline_toBaselineOf="@+id/skip_button"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/current_score_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/current_score(gameViewModel.score)}"
+            app:layout_constraintBottom_toTopOf="@+id/skip_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/current_time_text"
+            style="@style/small_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{gameViewModel.currentTimeString}"
+            app:layout_constraintBottom_toTopOf="@+id/current_score_text"
+            app:layout_constraintEnd_toEndOf="@+id/current_score_text"
+            app:layout_constraintStart_toStartOf="@+id/current_score_text" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
